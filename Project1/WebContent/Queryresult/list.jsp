@@ -42,5 +42,22 @@
 	
 	
 </table>
+<br>
+
+<table border="1" width="70%" align="center">
+	<tr>
+		<th>Email</th>
+		<th>Name</th>
+		<th>Affiliation</th>
+	</tr>
+<c:forEach items="${author}" var="user">
+	<tr>
+		<td>${user.email}</td> 
+		<td>${user.name}</td>
+		<td>${user.affiliation}</td>
+	</tr>
+	</c:forEach>
+</table>
+
 </body>
 </html>

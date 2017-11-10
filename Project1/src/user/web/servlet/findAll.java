@@ -40,6 +40,7 @@ public class findAll extends HttpServlet {
 			
 			request.setAttribute("paper", userservice.findPaperall());
 			
+			request.setAttribute("author", userservice.findAllAuthor());
 			 
 			
 			

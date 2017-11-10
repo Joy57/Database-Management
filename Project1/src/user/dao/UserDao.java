@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import user.domain.User;
+import user.domain.author;
 import user.domain.paper;
 
 
@@ -132,9 +133,9 @@ public class UserDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			Connection connect = DriverManager
-			          .getConnection("jdbc:mysql://localhost:3306/csc4710?"
+			          .getConnection("jdbc:mysql://localhost:3306/sampledb?"
 				              + "user=root&password=pass123");
-			
+			//======================
 			String InsertQuery="insert into paper(paperID,title,Abstract,pdf) values(11,'titleX','AbstractXX','pdfxxx');";
 			  Statement stat = null;
 			  stat=connect.createStatement();
@@ -147,6 +148,7 @@ public class UserDao {
 			    {
 			        System.out.println("Unable to Insert Record to database.");
 			    }
+			    //================
 			
 			String sql = "select * from paper";
 			PreparedStatement preparestatement = connect.prepareStatement(sql); 
@@ -175,5 +177,57 @@ public class UserDao {
 		return list;
 		
 	}
+	
+	
+	public List<Object> findAllAuthor() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		List<Object> list = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Connection connect = DriverManager
+			          .getConnection("jdbc:mysql://localhost:3306/sampledb?"
+				              + "user=root&password=pass123");
+			//======================
+			String InsertQuery1="insert into author (email,name,affiliation) values('mrauthor@email.com','Mr. Author','writer');";
+			  Statement stat = null;
+			  stat=connect.createStatement();
+			    try 
+			    {
+			        stat.executeUpdate(InsertQuery1);
+			        System.out.println("Record Inserted to database successfully.");
+			    }
+			    catch(SQLException e)
+			    {
+			        System.out.println("Unable to Insert Record to database.");
+			    }
+			    //================
+			
+			String sql = "select * from author";
+			PreparedStatement preparestatement = connect.prepareStatement(sql); 
+			//ResultSet resultSet = preparestatement.executeQuery();
+			ResultSet rs = preparestatement.executeQuery();
+//			while(resultSet.next()){
+//				User user = new User();
+//				user.setUsername(resultSet.getString("username"));
+//	    		user.setPassword(resultSet.getString("password"));
+//	    		user.setEmail(resultSet.getString("email"));
+//	    		list.add(user);
+//			 }
+			while (rs.next()) {
+				author author1 = new author();
+	            author1.setEmail (rs.getString("email"));
+	            author1.setName(rs.getString("name"));
+	            author1.setAffiliation(rs.getString("affiliation"));
+	            list.add(author1);
+	            
+	         }
+			 
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return list;
+		
+	}
+	
+	
 		
 }

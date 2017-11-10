@@ -52,4 +52,8 @@ public class UserService {
 		return userDao.findPaperall();
 		
 	}
+	public List<Object> findAllAuthor() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		return userDao.findAllAuthor();
+		
+	}
 }
